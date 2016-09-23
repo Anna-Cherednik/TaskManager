@@ -1,0 +1,40 @@
+﻿@model IEnumerable<TaskManager.Models.TaskModel>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("")
+        </th>
+        <th class="wide">
+            @Html.DisplayNameFor(model => model.Todo)
+        </th>
+        <th class="narrow">
+            @Html.DisplayNameFor(model => model.AutorId)
+        </th>
+        <th class="narrow"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPerfomed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Todo)
+            </td>
+            <td>
+                @if (item.Autor.Email != HttpContext.Current.User.Identity.Name)
+                {
+                    @Html.DisplayFor(modelItem => item.Autor.Email)
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TaskId }) |
+                @Html.ActionLink("Share", "Share", new { id = item.TaskId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TaskId })
+            </td>
+        </tr>
+    }
+
+</table>

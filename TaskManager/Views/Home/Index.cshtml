@@ -1,0 +1,24 @@
+﻿@using TaskManager.Models
+@model IEnumerable<TaskManager.Models.TaskModel>
+
+@{
+    ViewBag.Title = "Tasks";
+}
+
+<h2>List of tasks</h2>
+<p>
+    @Html.ActionLink("Create New task", "Create")
+</p>
+<div id="refresh">
+    @Html.Partial("_Refresher", Model)
+</div>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        // standard on load code goes here with $ prefix
+        // note: the $ is setup inside the anonymous function of the ready command
+        window.setInterval(function () { $('#refresh').load('/Home/Refresh'); }, 3000); // every 3 sec
+
+    });
+</script>
